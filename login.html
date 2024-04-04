@@ -147,9 +147,6 @@
                 <input id="sp" type="password" placeholder="Password"  required/>
                 <input type="submit" onclick="login()" value="Submit"/>
 
-               <!-- <a class="js-submit" href="http://localhost:5500/FindBlood-group.html" >Submit</a> -->
-
-                <!-- <button class="findblood" onclick="document.querySelector('.findblood').innerHTML = findBloodHTML;">login</button> -->
 
                 <p onclick="forTabFun()">Forget Password?</p>
             </div>
@@ -171,23 +168,21 @@
             </div>
         </div>
     </div>
-    <!--<div id="footer">
-        <h2>By. Mansoor Amin </br> Roll No. 1941</h2>
-
-    </div>-->
+    
     <script>
-        var numberArray = [];
-        var retnumberArray = [];
-        let retnumber = localStorage.getItem("mobilenumber"); 
-        retnumberArray = JSON.parse(retnumber); 
-        console.log(retnumberArray[0]);
-        var passwordArray = [];
-        var retpasswordArray = [];
-        let  retpassword = localStorage.getItem("password"); 
-        retpasswordArray = JSON.parse(retpassword);
+        const numberArray = [];
+        var localretnumberArray = [];
+        let retnumber = localStorage.getItem("mobilenumber1"); 
+        localretnumberArray = JSON.parse(retnumber); 
+        //console.log(retnumberArray[0]);
 
-        console.log(retnumberArray,retpasswordArray);
-        console.log(typeof(retnumberArray[0]),typeof(retpasswordArray[0]));
+        var passwordArray = [];
+        var localretpasswordArray = [];
+        let retpassword = localStorage.getItem("password1"); 
+        localretpasswordArray = JSON.parse(retpassword);
+       //console.log(retpasswordArray[0]);
+        console.log(localretnumberArray,localretpasswordArray);
+        //console.log(typeof(retnumberArray[0]),typeof(retpasswordArray[0]));
         var loginBox = document.getElementById("login");
         var regBox = document.getElementById("register");
         var forgetBox = document.getElementById("forgot");
@@ -196,7 +191,7 @@
         var regTab = document.getElementById("rt");
 
         function regTabFun(){
-           // event.preventDefault();
+            event.preventDefault();
 
             regBox.style.visibility="visible";
             loginBox.style.visibility="hidden";
@@ -235,7 +230,7 @@
             var number = document.getElementById("re").value;
             var password = document.getElementById("rp").value;
             var passwordRetype = document.getElementById("rrp").value;
-            console.log(typeof(numberArray));
+            //console.log(typeof(retnumberArray));
             if (number === ""){
                 alert("mobile number is required.");
                 return ;
@@ -252,15 +247,21 @@
                 alert("Password don't match retype your Password.");
                 return;
             }
-            else if(numberArray.indexOf(number) === -1){
-                numberArray.push(number);
-                const String1 = JSON.stringify(numberArray);
-                localStorage.setItem("mobilenumber",String1);
-                
-                passwordArray.push(password);
-                const String2 = JSON.stringify(passwordArray);
-                localStorage.setItem("password",String2);
+            else if(localretnumberArray.indexOf(number) === -1){
+                localretnumberArray.push(number);
 
+                const String1 = JSON.stringify(localretnumberArray);
+                localStorage.setItem("mobilenumber1",String1);
+                console.log(localStorage.getItem("mobilenumber1"));
+
+                localretpasswordArray.push(password);
+
+                const String2 = JSON.stringify(localretpasswordArray);
+                localStorage.setItem("password1",String2);
+                console.log(localStorage.getItem("password1"));
+
+
+                console.log(localretnumberArray,localretpasswordArray);
                // console.log(numberArray,passwordArray);
                 
                 alert( "  Thanks for registration. \nTry to login Now");
@@ -276,13 +277,15 @@
         }
         function login(){
             event.preventDefault();
+        
+            console.log(localretnumberArray,localretpasswordArray);
 
             var number = document.getElementById("se").value;
             var password = document.getElementById("sp").value; 
-            var i = retnumberArray.indexOf(number);
-            console.log(retnumberArray[i]);
+            var i = localretnumberArray.indexOf(number);
+            console.log(localretnumberArray[i]);
             console.log(i);
-            if(retnumberArray[i] !== number)
+            if(localretnumberArray[i] !== number)
             {
                 
                 if (number === ""){
@@ -293,7 +296,7 @@
                 alert("Mobile Number does not exist.");
                 return ;
             }
-             else if(retpasswordArray[i] !== password)
+             else if(localretpasswordArray[i] !== password)
             {
                 if (password === ""){
                     alert("Password required.");

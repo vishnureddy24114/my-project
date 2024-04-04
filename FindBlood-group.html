@@ -41,12 +41,17 @@
                 <h3>Blood Donar</h3>
     
                 <input id="sp" type="text" placeholder="Donar Blood Group" class="js-blooddonar"required/>
+
                 <input id="sq" type="text" placeholder="Donar Name" 
                 class="js-blooddonar1"required/>
-                <input id="sr" type="text" placeholder="Donar Number"
+
+                <input id="sr" type="text" placeholder="Donar Number" maxlength="10"
                 class="js-blooddonar2"required/>
-                <input id="ss" type="text" placeholder="Donar Aadhar"  class="js-blooddonar3" required/>
+
+                <input id="ss" type="text" placeholder="Donar Aadhar"   maxlength="12"class="js-blooddonar3" required/>
+
                 <input id="st" type="text" placeholder="Donar Address" class="js-blooddonar4" required/><br>
+
                 <button class="save" onclick="saveBloodDonar();">Save</button>
                 <button class="submit" onclick="submitBloodDonar();">Submit</button>
             </div>
@@ -57,9 +62,14 @@
     
                 <input id="sa" type="text" placeholder="Accepter Name"
                 class="js-bloodAccepter" required/>
-                <input id="sb" type=" Number" placeholder="Accepter Number" class="js-bloodAccepter1" required/>
-                <input id="sc" type="number" placeholder="Accepter Aadhar" class="js-bloodAccepter2" required/>
+
+                <input id="sb" type=" Number" placeholder="Accepter Number" maxlength="10" class="js-bloodAccepter1" required/>
+
+                <input id="sc" type="text" placeholder="Donar Aadhar"   maxlength="12"class="js-bloodAccepter2" required/>
+
+
                 <input id="sd" type="text" placeholder="Accepter Address" class="js-bloodAccepter3" required/><br>
+
                 <button class="save" onclick="saveBloodAccepter();">Save</button>
                 <button class="submit" onclick="submitBloodAccepter();">Submit</button>
             </div>
@@ -70,9 +80,13 @@
     
                 <input id="s1" type="text" placeholder="Blood Group" 
                 class= "js-bloodBank"required/>
+
                 <input id="s2" type="text" placeholder="BloodBank Name" class= "js-bloodBank1" required/>
-                <input id="s3" type=" Number" placeholder="BloodBank Number" class= "js-bloodBank2" required/>
+
+                <input id="s3" type=" Number" placeholder="BloodBank Number" maxlength="10" class= "js-bloodBank2" required/>
+
                 <input id="s4" type="text" placeholder="BloodBank Address" class= "js-bloodBank3" required/><br>
+
                 <button class="save" onclick="saveBloodBank();">Save</button>
                 <button class="submit" onclick="submitBloodBank();">Submit</button>
     
@@ -121,16 +135,28 @@
        }
 
        var donarArray = [];
-       var DonarArray = [];
-       const donarDetails = localStorage.getItem("donar"); 
-      DonarArray = JSON.parse(donarDetails); 
-       
-       const accepterArray = [];
-       const bloodBankArray = [];
+       var localDonarArray = [];
+       let donarDetails = localStorage.getItem("donar"); 
+       localDonarArray = JSON.parse(donarDetails); 
+       console.log(localDonarArray)
+
+       var accepterArray = [];
+       var localAccepterArray = [];
+       let accepterDetails = localStorage.getItem("accepter");
+       localAccepterArray = JSON.parse(accepterDetails);
+       console.log(localAccepterArray);
+
+       var bloodBankArray = [];
+       var localBloodBankArray = [];
+       let bloodbankDetails = localStorage.getItem("bloodbank");
+       localBloodBankArray = JSON.parse(bloodbankDetails);
+       console.log(localBloodBankArray);
 
        function submitBloodDonar()
        {
             event.preventDefault();
+            var x = document.getElementById("sr").maxLength;
+            var y = document.getElementById("ss").maxLength;
 
             var DonarBloodGroup = document.getElementById("sp").value;
             var DonarName = document.getElementById("sq").value;
@@ -159,7 +185,7 @@
                 alert("Donar Address is required.");
                 return;  
             }
-            else if(donarArray.indexOf(DonarAadhar) == -1){
+            else if(localDonarArray.indexOf(DonarAadhar) === -1){
                 donarArray.push(DonarBloodGroup);
                 donarArray.push(DonarName);
                 donarArray.push(DonarNumber);
@@ -167,14 +193,9 @@
                 donarArray.push(DonarAddress);
 
 
-                const String1 = JSON.stringify(donarArray);
+                const String1 = JSON.stringify(localDonarArray);
                 localStorage.setItem("donar",String1);
 
-                
-                // console.log(String1);
-                
-                console.log(DonarArray);
-               // alert( "  Thanks for registration. \nTry to login Now");
 
                 document.getElementById("sp").value ="";
                 document.getElementById("sq").value="";
@@ -193,6 +214,8 @@
        function submitBloodAccepter()
        {
             event.preventDefault();
+            var a = document.getElementById("sb").maxLength;
+            var b = document.getElementById("sc").maxLength;
 
             var AccepterName = document.getElementById("sa").value;
             var AccepterNumber = document.getElementById("sb").value;
@@ -200,31 +223,32 @@
             var AccepterAddress = document.getElementById("sd").value;
 
             if (AccepterName == ""){
-                alert("Donar Name is  required.");
+                alert("Accepter Name is  required.");
                 return ;
             }
             else if (AccepterNumber == ""){
-                alert("DOnar Number is required.");
+                alert("Accepter Number is required.");
                 return ;
             }
             else if (AccepterAadhar== "" ){
-                alert("Donar Aadhar is required.");
+                alert("Accepter Aadhar is required.");
                 return;
             }
             else if(AccepterAddress == "")
             {
-                alert("Donar Address is required.");
+                alert("Accepter Address is required.");
                 return;  
             }
-            else if(accepterArray.indexOf(AccepterAadhar) == -1){
-               
+            else if(localAccepterArray.indexOf(AccepterAadhar) === -1){
                 accepterArray.push(AccepterName);
                 accepterArray.push(AccepterNumber);
                 accepterArray.push(AccepterAadhar);
                 accepterArray.push(AccepterAddress);
 
-                 console.log(accepterArray);
-               // alert( "  Thanks for registration. \nTry to login Now");
+
+                const String1 = JSON.stringify(localAccepterArray);
+                localStorage.setItem("donar",String1);
+
                 document.getElementById("sa").value="";
                 document.getElementById("sb").value="";
                 document.getElementById("sc").value="";
@@ -240,35 +264,39 @@
         function submitBloodBank()
        {
             event.preventDefault();
-
+            var c = document.getElementById("s3").maxLength;
+           
             var BloodGroup = document.getElementById("s1").value;
             var BloodBankName = document.getElementById("s2").value;
             var BloodBankNumber = document.getElementById("s3").value;
             var BloodBankAddress = document.getElementById("s4").value;
 
             if (BloodGroup == ""){
-                alert("Donar Name is  required.");
+                alert("BloodGroup Name is  required.");
                 return ;
             }
             else if (BloodBankName == ""){
-                alert("DOnar Number is required.");
+                alert("BloodBank Name is required.");
                 return ;
             }
             else if (BloodBankNumber == "" ){
-                alert("Donar Aadhar is required.");
+                alert("BloodBank Number is required.");
                 return;
             }
             else if(BloodBankAddress == "")
             {
-                alert("Donar Address is required.");
+                alert("BloodBank Address is required.");
                 return;  
             }
-            else if(bloodBankArray.indexOf() == -1){
+            else if(localBloodBankArray.indexOf(BloodBankName) === -1){
                
                 bloodBankArray.push(BloodGroup);
                 bloodBankArray.push(BloodBankName);
                 bloodBankArray.push(BloodBankNumber);
                 bloodBankArray.push(BloodBankAddress);
+
+                const String3 = JSON.stringify(localBloodBankArray);
+                localStorage.setItem("bloodbank",String3);
                 
                // alert( "  Thanks for registration. \nTry to login Now");
                 document.getElementById("s1").value="";
