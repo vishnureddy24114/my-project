@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Acceptor & Donar</title>
+        <style>
+            .find-blood {
+                background-color: red;
+                color: black;
+                padding: 15px 15px;
+                border: none;
+                font-size: 25px;
+                font-weight: bold;
+                border-radius: 15px;
+                cursor: pointer;
+                margin-left: 300px;
+                width: 180px;
+            }
+
+            .submit {
+                background-color: green;
+                margin-top: 10px;
+            }
+
+            .save {
+                background-color: royalblue;
+                margin-top: 10px;
+            }
+        </style>
+    
+    </head>
+    <body>
+        
+        <p class="find-blood">FIND BLOOD</p>
+
+    
+            <!-- <button class="js-blood-donar" onclick=" document.querySelector('.js-blood-donar').innerHTML= bloodDonarHTML;">Blood Donar</button>
+            <button class="js-blood-accepter"onclick=" document.querySelector('.js-blood-accepter').innerHTML= bloodAcceptorHTML;">Blood Accepter</button>
+            <button class="js-blood-banks"onclick=" document.querySelector('.js-blood-banks').innerHTML= bloodBanksHTML;">Blood Banks</button> -->
+
+             <div id="login">
+                <h3>Blood Donar</h3>
+    
+                <input id="sp" type="text" placeholder="Donar Blood Group" class="js-blooddonar"required/>
+                <input id="sq" type="text" placeholder="Donar Name" 
+                class="js-blooddonar1"required/>
+                <input id="sr" type="text" placeholder="Donar Number"
+                class="js-blooddonar2"required/>
+                <input id="ss" type="text" placeholder="Donar Aadhar"  class="js-blooddonar3" required/>
+                <input id="st" type="text" placeholder="Donar Address" class="js-blooddonar4" required/><br>
+                <button class="save" onclick="saveBloodDonar();">Save</button>
+                <button class="submit" onclick="submitBloodDonar();">Submit</button>
+            </div>
+                
+                
+            <div id="login" >
+                <h3>Blood Acceptor</h3>
+    
+                <input id="sa" type="text" placeholder="Accepter Name"
+                class="js-bloodAccepter" required/>
+                <input id="sb" type=" Number" placeholder="Accepter Number" class="js-bloodAccepter1" required/>
+                <input id="sc" type="number" placeholder="Accepter Aadhar" class="js-bloodAccepter2" required/>
+                <input id="sd" type="text" placeholder="Accepter Address" class="js-bloodAccepter3" required/><br>
+                <button class="save" onclick="saveBloodAccepter();">Save</button>
+                <button class="submit" onclick="submitBloodAccepter();">Submit</button>
+            </div>
+               
+    
+            <div id="login" >
+                <h3>Blood Banks</h3>
+    
+                <input id="s1" type="text" placeholder="Blood Group" 
+                class= "js-bloodBank"required/>
+                <input id="s2" type="text" placeholder="BloodBank Name" class= "js-bloodBank1" required/>
+                <input id="s3" type=" Number" placeholder="BloodBank Number" class= "js-bloodBank2" required/>
+                <input id="s4" type="text" placeholder="BloodBank Address" class= "js-bloodBank3" required/><br>
+                <button class="save" onclick="saveBloodBank();">Save</button>
+                <button class="submit" onclick="submitBloodBank();">Submit</button>
+    
+            </div>
+            
+              
+    <script>
+
+       function saveBloodDonar()
+       {
+        const inputElement = document.querySelector('.js-blooddonar');
+        console.log(inputElement.value);
+        const inputElement1 = document.querySelector('.js-blooddonar1');
+        console.log(inputElement1.value);
+        const inputElement2 = document.querySelector('.js-blooddonar2');
+        console.log(inputElement2.value);
+        const inputElement3 = document.querySelector('.js-blooddonar3');
+        console.log(inputElement3.value);
+        const inputElement4 = document.querySelector('.js-blooddonar4');
+        console.log(inputElement4.value);
+       }
+        
+
+       function saveBloodAccepter()
+       {
+        const inputElement = document.querySelector('.js-bloodAccepter');
+        console.log(inputElement.value);
+        const inputElement1 = document.querySelector('.js-bloodAccepter1');
+        console.log(inputElement1.value);
+        const inputElement2 = document.querySelector('.js-bloodAccepter2');
+        console.log(inputElement2.value);
+        const inputElement3 = document.querySelector('.js-bloodAccepter3');
+        console.log(inputElement3.value);
+       }
+
+       function saveBloodBank()
+       {
+        const inputElement = document.querySelector('.js-bloodBank');
+        console.log(inputElement.value);
+        const inputElement1 = document.querySelector('.js-bloodBank1');
+        console.log(inputElement1.value);
+        const inputElement2 = document.querySelector('.js-bloodBank2');
+        console.log(inputElement2.value);
+        const inputElement3 = document.querySelector('.js-bloodBank3');
+        console.log(inputElement3.value);
+       }
+
+       var donarArray = [];
+       var DonarArray = [];
+       const donarDetails = localStorage.getItem("donar"); 
+      DonarArray = JSON.parse(donarDetails); 
+       
+       const accepterArray = [];
+       const bloodBankArray = [];
+
+       function submitBloodDonar()
+       {
+            event.preventDefault();
+
+            var DonarBloodGroup = document.getElementById("sp").value;
+            var DonarName = document.getElementById("sq").value;
+            var DonarNumber = document.getElementById("sr").value;
+            var DonarAadhar = document.getElementById("ss").value;
+            var DonarAddress = document.getElementById("st").value;
+
+            if (DonarBloodGroup == ""){
+                alert("Blood Group is required.");
+                return ;
+            }
+            else if (DonarName == ""){
+                alert("Donar Name is  required.");
+                return ;
+            }
+            else if (DonarNumber == ""){
+                alert("DOnar Number is required.");
+                return ;
+            }
+            else if (DonarAadhar== "" ){
+                alert("Donar Aadhar is required.");
+                return;
+            }
+            else if(DonarAddress == "")
+            {
+                alert("Donar Address is required.");
+                return;  
+            }
+            else if(donarArray.indexOf(DonarAadhar) == -1){
+                donarArray.push(DonarBloodGroup);
+                donarArray.push(DonarName);
+                donarArray.push(DonarNumber);
+                donarArray.push(DonarAadhar);
+                donarArray.push(DonarAddress);
+
+
+                const String1 = JSON.stringify(donarArray);
+                localStorage.setItem("donar",String1);
+
+                
+                // console.log(String1);
+                
+                console.log(DonarArray);
+               // alert( "  Thanks for registration. \nTry to login Now");
+
+                document.getElementById("sp").value ="";
+                document.getElementById("sq").value="";
+                document.getElementById("sr").value="";
+                document.getElementById("ss").value="";
+                document.getElementById("st").value="";
+            }
+            else{
+                alert( " is already register.");
+                return ;
+            }
+        }
+
+       //console.log(donarArray);
+
+       function submitBloodAccepter()
+       {
+            event.preventDefault();
+
+            var AccepterName = document.getElementById("sa").value;
+            var AccepterNumber = document.getElementById("sb").value;
+            var AccepterAadhar = document.getElementById("sc").value;
+            var AccepterAddress = document.getElementById("sd").value;
+
+            if (AccepterName == ""){
+                alert("Donar Name is  required.");
+                return ;
+            }
+            else if (AccepterNumber == ""){
+                alert("DOnar Number is required.");
+                return ;
+            }
+            else if (AccepterAadhar== "" ){
+                alert("Donar Aadhar is required.");
+                return;
+            }
+            else if(AccepterAddress == "")
+            {
+                alert("Donar Address is required.");
+                return;  
+            }
+            else if(accepterArray.indexOf(AccepterAadhar) == -1){
+               
+                accepterArray.push(AccepterName);
+                accepterArray.push(AccepterNumber);
+                accepterArray.push(AccepterAadhar);
+                accepterArray.push(AccepterAddress);
+
+                 console.log(accepterArray);
+               // alert( "  Thanks for registration. \nTry to login Now");
+                document.getElementById("sa").value="";
+                document.getElementById("sb").value="";
+                document.getElementById("sc").value="";
+                document.getElementById("sd").value="";
+            }
+            else{
+                alert( " is already register.");
+                return ;
+            }
+        }
+        
+
+        function submitBloodBank()
+       {
+            event.preventDefault();
+
+            var BloodGroup = document.getElementById("s1").value;
+            var BloodBankName = document.getElementById("s2").value;
+            var BloodBankNumber = document.getElementById("s3").value;
+            var BloodBankAddress = document.getElementById("s4").value;
+
+            if (BloodGroup == ""){
+                alert("Donar Name is  required.");
+                return ;
+            }
+            else if (BloodBankName == ""){
+                alert("DOnar Number is required.");
+                return ;
+            }
+            else if (BloodBankNumber == "" ){
+                alert("Donar Aadhar is required.");
+                return;
+            }
+            else if(BloodBankAddress == "")
+            {
+                alert("Donar Address is required.");
+                return;  
+            }
+            else if(bloodBankArray.indexOf() == -1){
+               
+                bloodBankArray.push(BloodGroup);
+                bloodBankArray.push(BloodBankName);
+                bloodBankArray.push(BloodBankNumber);
+                bloodBankArray.push(BloodBankAddress);
+                
+               // alert( "  Thanks for registration. \nTry to login Now");
+                document.getElementById("s1").value="";
+                document.getElementById("s2").value="";
+                document.getElementById("s3").value="";
+                document.getElementById("s4").value="";
+            }
+            else{
+                alert( " is already register.");
+                return ;
+            }
+        }
+
+    </script>
+    </body>
+    
+</html>
