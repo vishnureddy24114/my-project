@@ -4,6 +4,7 @@
         <title>Acceptor & Donar</title>
         <style>
             .find-blood {
+
                 background-color: red;
                 color: black;
                 padding: 15px 15px;
@@ -12,8 +13,9 @@
                 font-weight: bold;
                 border-radius: 15px;
                 cursor: pointer;
-                margin-left: 300px;
+               
                 width: 180px;
+                align-self: center;
             }
 
             .submit {
@@ -26,22 +28,47 @@
                 margin-top: 10px;
             }
 
-           
+            .tabs{
+                background-color: rebeccapurple;
+                color: black;
+                padding: 15px 15px;
+                border: none;
+                font-size: 25px;
+                font-weight: bold;
+                border-radius: 15px;
+                cursor: pointer;
+                margin-left: 300px;
+                width: 180px;
+            }
         </style>
     
     </head>
     <body>
+ 
         <body style="background-color:red;"></body>
+
+        <div id="tabs">
+            <p id="bdt" class="tabs" onclick="loginTabFun()">Log in</p>
+            <p id="rt" class="tabs" onclick="regTabFun()">Register</p>
+
+            <div id="clear"></div>
+        </div>
+        
         <p class="find-blood">FIND BLOOD</p>
 
-    
-            <!-- <button class="js-blood-donar" onclick=" document.querySelector('.js-blood-donar').innerHTML= bloodDonarHTML;">Blood Donar</button>
-            <button class="js-blood-accepter"onclick=" document.querySelector('.js-blood-accepter').innerHTML= bloodAcceptorHTML;">Blood Accepter</button>
-            <button class="js-blood-banks"onclick=" document.querySelector('.js-blood-banks').innerHTML= bloodBanksHTML;">Blood Banks</button> -->
+            <p class="tabs" onclick="document.querySelector('.js-blood-donar').innerHTML=bloodDonarHTML;">Blood Donar</p>
+            <p>If you want to donate the blood, then please click the above option</p>
 
-            <div id="login">
+            <p class="tabs"onclick=" document.querySelector('.js-blood-accepter').innerHTML= bloodAccepterHTML;">Blood Accepter</p>
+
+            <p class="tabs"onclick=" document.querySelector('.js-blood-banks').innerHTML= bloodBankHTML;">Blood Banks</p>
+              
+    <script>
+            
+            
+             bloodDonarHTML=`<div id="bloodDonar">
                 <h3>Blood Donar</h3>
-                 <!-- <p id="lt" class="tabs" onclick="bloodDonarFun();">Blood Donar</p> -->
+            
                 <input id="sp" type="text" placeholder="Donar Blood Group" class="js-blooddonar"required/>
 
                 <input id="sq" type="text" placeholder="Donar Name" 
@@ -56,13 +83,12 @@
 
                 <button class="save" onclick="saveBloodDonar();">Save</button>
                 <button class="submit" onclick="submitBloodDonar();">Submit</button>
-            </div> 
-                
-                
-             <div id="login" > 
-                 <h3>Blood Acceptor</h3>
 
-                <!-- <p id="lt" class="tabs" onclick="bloodAccepterFun();">Blood Accepter</p> -->
+            </div> `;
+       
+
+           bloodAccepterHTML =`<div id = "bloodAccepter">
+                <h3>Blood Accepter</h3>
 
                 <input id="sa" type="text" placeholder="Accepter Name"
                 class="js-bloodAccepter" required/>
@@ -71,18 +97,15 @@
 
                 <input id="sc" type="text" placeholder="Donar Aadhar"   maxlength="12"class="js-bloodAccepter2" required/>
 
-
                 <input id="sd" type="text" placeholder="Accepter Address" class="js-bloodAccepter3" required/><br>
 
                 <button class="save" onclick="saveBloodAccepter();">Save</button>
                 <button class="submit" onclick="submitBloodAccepter();">Submit</button>
-            </div> 
-               
-    
-            <div id="login" >
-                <h3>Blood Banks</h3>
-                <!-- <p id="lt" class="tabs" onclick="bloodbankFun();">Blood Bank</p> -->
-    
+                </div>`;
+
+                bloodBankHTML = ` 
+                <div id = "bloodBank">
+                <h3>Blood Bank</h3>
                 <input id="s1" type="text" placeholder="Blood Group" 
                 class= "js-bloodBank"required/>
 
@@ -94,12 +117,8 @@
 
                 <button class="save" onclick="saveBloodBank();">Save</button>
                 <button class="submit" onclick="submitBloodBank();">Submit</button>
-    
-            </div>
-            
-              
-    <script>
-
+                </div>`;
+               
        function saveBloodDonar()
        {
         const inputElement = document.querySelector('.js-blooddonar');
@@ -130,7 +149,7 @@
        }
 
         const donarArray = [];
-        var localDonarArray = ["1","1","1","1","1"];
+        var localDonarArray = [];
         let donarDetails = localStorage.getItem("donar"); 
         localDonarArray = JSON.parse(donarDetails); 
         console.log(localDonarArray);
@@ -180,7 +199,7 @@
                 alert("Donar Address is required.");
                 return;  
             }
-            else if(localDonarArray.indexOf(DonarNumber,DonarAadhar) === -1){
+            else if(localDonarArray.indexOf(DonarBloodGroup,DonarName,DonarNumber,DonarAadhar,DonarAddress) === -1){
                 localDonarArray.push(DonarBloodGroup);
                 localDonarArray.push(DonarName);
                 localDonarArray.push(DonarNumber);
@@ -208,30 +227,24 @@
 
        function submitBloodAccepter()
        {
+            event.preventDefault();
+            var a = document.getElementById("sb").maxLength;
+            var b = document.getElementById("sc").maxLength;
 
-
-        event.preventDefault();
-            var x = document.getElementById("sb").maxLength;
-            var y = document.getElementById("sc").maxLength;
-
-            
             var AccepterName = document.getElementById("sa").value;
             var AccepterNumber = document.getElementById("sb").value;
             var AccepterAadhar = document.getElementById("sc").value;
             var AccepterAddress = document.getElementById("sd").value;
 
-            if (AccepterName === "")
-            {
+            if (AccepterName === ""){
                 alert("Accepter Name is  required.");
                 return ;
             }
-            else if (AccepterNumber === "")
-            {
+            else if (AccepterNumber === ""){
                 alert("Accepter Number is required.");
                 return ;
             }
-            else if (AccepterAadhar=== "" )
-            {
+            else if (AccepterAadhar=== "" ){
                 alert("Accepter Aadhar is required.");
                 return;
             }
@@ -240,19 +253,17 @@
                 alert("Accepter Address is required.");
                 return;  
             }
-            else if(localAccepterArray.indexOf(AccepterNumber,AccepterAadhar) === -1){
-                
+            else if(localAccepterArray.indexOf(AccepterName,AccepterNumber,AccepterAadhar,AccepterAddress) === -1){
                 localAccepterArray.push(AccepterName);
                 localAccepterArray.push(AccepterNumber);
                 localAccepterArray.push(AccepterAadhar);
                 localAccepterArray.push(AccepterAddress);
 
 
-                const String2= JSON.stringify(localAccepterArray);
+                const String2 = JSON.stringify(localAccepterArray);
                 localStorage.setItem("accepter",String2);
                 console.log(localAccepterArray);
 
-                
                 document.getElementById("sa").value="";
                 document.getElementById("sb").value="";
                 document.getElementById("sc").value="";
@@ -263,6 +274,7 @@
                 return ;
             }
         }
+        
 
         function submitBloodBank()
        {

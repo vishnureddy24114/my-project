@@ -144,7 +144,9 @@
                 <h3>Sign in</h3>
 
                 <input id="se" type="number" placeholder="Mobile Number" required/>
+
                 <input id="sp" type="password" placeholder="Password"  required/>
+
                 <input type="submit" onclick="login()" value="Submit"/>
 
 
@@ -153,9 +155,12 @@
             <div id="register" class="comm">
                 <h3>Register</h3>
 
-                <input id="re" type="number" placeholder="Mobile Number" required/>
+                <input id="re" type="text" placeholder="Mobile Number" maxlength="10" required/>
+
                 <input id="rp" type="password" placeholder="Password" required/>
+
                 <input id="rrp" type="password" placeholder="Re write Password" required/>
+
                 <input type="submit" onclick="register()" value="Submit"/>
 
             </div >
@@ -226,7 +231,7 @@
         function register(){
             event.preventDefault();
             //var i = numberArray.indexOf(number);
-
+            var x = document.getElementById("re").maxLength;
             var number = document.getElementById("re").value;
             var password = document.getElementById("rp").value;
             var passwordRetype = document.getElementById("rrp").value;
