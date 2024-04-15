@@ -41,7 +41,6 @@
 
             <div id="login">
                 <h3>Blood Donar</h3>
-                 <!-- <p id="lt" class="tabs" onclick="bloodDonarFun();">Blood Donar</p> -->
                 <input id="sp" type="text" placeholder="Donar Blood Group" class="js-blooddonar"required/>
 
                 <input id="sq" type="text" placeholder="Donar Name" 
@@ -62,12 +61,10 @@
              <div id="login" > 
                  <h3>Blood Acceptor</h3>
 
-                <!-- <p id="lt" class="tabs" onclick="bloodAccepterFun();">Blood Accepter</p> -->
-
                 <input id="sa" type="text" placeholder="Accepter Name"
                 class="js-bloodAccepter" required/>
 
-                <input id="sb" type=" Number" placeholder="Accepter Number" maxlength="10" class="js-bloodAccepter1" required/>
+                <input id="sb" type="text" placeholder="Accepter Number"  maxlength ="10" class="js-bloodAccepter1" required/>
 
                 <input id="sc" type="text" placeholder="Donar Aadhar"   maxlength="12"class="js-bloodAccepter2" required/>
 
@@ -81,7 +78,6 @@
     
             <div id="login" >
                 <h3>Blood Banks</h3>
-                <!-- <p id="lt" class="tabs" onclick="bloodbankFun();">Blood Bank</p> -->
     
                 <input id="s1" type="text" placeholder="Blood Group" 
                 class= "js-bloodBank"required/>
@@ -130,7 +126,7 @@
        }
 
         const donarArray = [];
-        var localDonarArray = ["1","1","1","1","1"];
+        var localDonarArray = [];
         let donarDetails = localStorage.getItem("donar"); 
         localDonarArray = JSON.parse(donarDetails); 
         console.log(localDonarArray);
@@ -145,7 +141,7 @@
         var localBloodBankArray = [];
         let bloodbankDetails = localStorage.getItem("bloodbank");
         localBloodBankArray = JSON.parse(bloodbankDetails);
-        console.log(localBloodBankArray);
+        //console.log(localBloodBankArray);
 
        function submitBloodDonar()
        {
@@ -158,7 +154,8 @@
             var DonarNumber = document.getElementById("sr").value;
             var DonarAadhar = document.getElementById("ss").value;
             var DonarAddress = document.getElementById("st").value;
-
+            
+           
             if (DonarBloodGroup === ""){
                 alert("Blood Group is required.");
                 return ;
@@ -180,7 +177,11 @@
                 alert("Donar Address is required.");
                 return;  
             }
-            else if(localDonarArray.indexOf(DonarNumber,DonarAadhar) === -1){
+            else if(localDonarArray.indexOf(DonarNumber) === -1 && localDonarArray.indexOf(DonarAadhar) === -1)
+            {
+                
+               // if(localDonarArray[i] !== DonarNumber)
+               // {}
                 localDonarArray.push(DonarBloodGroup);
                 localDonarArray.push(DonarName);
                 localDonarArray.push(DonarNumber);
@@ -190,8 +191,8 @@
 
                 const String1 = JSON.stringify(localDonarArray);
                 localStorage.setItem("donar",String1);
-                console.log(localDonarArray);
-
+               // console.log(localDonarArray);
+                 console.log(localDonarArray[localDonarArray.indexOf(DonarNumber)]);
                 document.getElementById("sp").value ="";
                 document.getElementById("sq").value="";
                 document.getElementById("sr").value="";
@@ -211,7 +212,7 @@
 
 
         event.preventDefault();
-            var x = document.getElementById("sb").maxLength;
+            //var x = document.getElementById("sb").maxLength;
             var y = document.getElementById("sc").maxLength;
 
             
@@ -240,7 +241,7 @@
                 alert("Accepter Address is required.");
                 return;  
             }
-            else if(localAccepterArray.indexOf(AccepterNumber,AccepterAadhar) === -1){
+            else if(localAccepterArray.indexOf(AccepterAadhar) === -1 && localAccepterArray.indexOf(AccepterNumber)=== -1){
                 
                 localAccepterArray.push(AccepterName);
                 localAccepterArray.push(AccepterNumber);
@@ -291,7 +292,7 @@
                 alert("BloodBank Address is required.");
                 return;  
             }
-            else if(localBloodBankArray.indexOf(BloodGroup,BloodBankName,BloodBankNumber,BloodBankAddress) === -1){
+            else if(localBloodBankArray.indexOf(BloodBankNumber) === -1){
                
                 localBloodBankArray.push(BloodGroup);
                 localBloodBankArray.push(BloodBankName);

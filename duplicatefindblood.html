@@ -47,26 +47,17 @@
  
         <body style="background-color:red;"></body>
 
-        <div id="tabs">
-            <p id="bdt" class="tabs" onclick="loginTabFun()">Log in</p>
-            <p id="rt" class="tabs" onclick="regTabFun()">Register</p>
-
-            <div id="clear"></div>
-        </div>
+        
         
         <p class="find-blood">FIND BLOOD</p>
 
-            <p class="tabs" onclick="document.querySelector('.js-blood-donar').innerHTML=bloodDonarHTML;">Blood Donar</p>
+            <!-- <p class="tabs" onclick="document.querySelector('.js-blood-donar').innerHTML=bloodDonarHTML;">Blood Donar</p>
             <p>If you want to donate the blood, then please click the above option</p>
 
             <p class="tabs"onclick=" document.querySelector('.js-blood-accepter').innerHTML= bloodAccepterHTML;">Blood Accepter</p>
 
-            <p class="tabs"onclick=" document.querySelector('.js-blood-banks').innerHTML= bloodBankHTML;">Blood Banks</p>
-              
-    <script>
-            
-            
-             bloodDonarHTML=`<div id="bloodDonar">
+            <p class="tabs"onclick=" document.querySelector('.js-blood-banks').innerHTML= bloodBankHTML;">Blood Banks</p> -->
+            <div id="bloodDonar">
                 <h3>Blood Donar</h3>
             
                 <input id="sp" type="text" placeholder="Donar Blood Group" class="js-blooddonar"required/>
@@ -84,10 +75,9 @@
                 <button class="save" onclick="saveBloodDonar();">Save</button>
                 <button class="submit" onclick="submitBloodDonar();">Submit</button>
 
-            </div> `;
+            </div>
        
-
-           bloodAccepterHTML =`<div id = "bloodAccepter">
+            <div id = "bloodAccepter">
                 <h3>Blood Accepter</h3>
 
                 <input id="sa" type="text" placeholder="Accepter Name"
@@ -101,10 +91,9 @@
 
                 <button class="save" onclick="saveBloodAccepter();">Save</button>
                 <button class="submit" onclick="submitBloodAccepter();">Submit</button>
-                </div>`;
+            </div>
 
-                bloodBankHTML = ` 
-                <div id = "bloodBank">
+            <div id = "bloodBank">
                 <h3>Blood Bank</h3>
                 <input id="s1" type="text" placeholder="Blood Group" 
                 class= "js-bloodBank"required/>
@@ -117,8 +106,10 @@
 
                 <button class="save" onclick="saveBloodBank();">Save</button>
                 <button class="submit" onclick="submitBloodBank();">Submit</button>
-                </div>`;
-               
+                </div>
+              
+    <script>
+        
        function saveBloodDonar()
        {
         const inputElement = document.querySelector('.js-blooddonar');
@@ -178,6 +169,14 @@
             var DonarAadhar = document.getElementById("ss").value;
             var DonarAddress = document.getElementById("st").value;
 
+            // if(localDonarArray === "")
+            // {
+            //     localDonarArray.push(DonarBloodGroup);
+            //     localDonarArray.push(DonarName);
+            //     localDonarArray.push(DonarNumber);
+            //     localDonarArray.push(DonarAadhar);
+            //     localDonarArray.push(DonarAddress);
+            // }
             if (DonarBloodGroup === ""){
                 alert("Blood Group is required.");
                 return ;
@@ -205,7 +204,6 @@
                 localDonarArray.push(DonarNumber);
                 localDonarArray.push(DonarAadhar);
                 localDonarArray.push(DonarAddress);
-
 
                 const String1 = JSON.stringify(localDonarArray);
                 localStorage.setItem("donar",String1);
